@@ -6,6 +6,8 @@
   "dependencies": {
     "cross-env": "^5.2.0",
     "gh-pages": "^1.2.0",
+    "gsap": "^2.0.1",
+    "jquery": "^3.3.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router": "^4.3.1",

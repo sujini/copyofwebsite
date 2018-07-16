@@ -44,7 +44,7 @@ class App extends Component {
                 cls = "";
                 break;
         }
-        //document.body.classList.add(cls);
+        document.body.className = cls;
 
         document.querySelectorAll('#header .right .top ul li').forEach((e,i) => {
             TweenMax.set(e,{autoAlpha:0,y:20});

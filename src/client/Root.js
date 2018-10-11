@@ -4,7 +4,7 @@ import App from 'shared/App';
 
 
 const Root = () => (
-    <HashRouter basename="/works">
+    <HashRouter basename="/">
         <App/>
     </HashRouter>
 );

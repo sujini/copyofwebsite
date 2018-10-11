@@ -1,12 +1,12 @@
 import React from "react";
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import App from 'shared/App';
 
 
 const Root = () => (
-    <BrowserRouter>
+    <HashRouter basename="/works">
         <App/>
-    </BrowserRouter>
+    </HashRouter>
 );
 
 export default Root;

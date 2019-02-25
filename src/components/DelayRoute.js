@@ -1,10 +1,10 @@
-import React, { Component,Fragment } from 'react';
+import React, { Component } from 'react';
+import {Route,Switch} from 'react-router-dom'
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Main,Les } from 'pages';
+import { Main,Les,Lidentite,Ateliers } from 'pages';
 import Animation from 'components/Animation';
 
-class DelayRoute extends Component {
+class DelayRoute2 extends Component {
     static contextTypes = {
         router: PropTypes.object
     }
@@ -12,10 +12,7 @@ class DelayRoute extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            shouldRender: true,
-            component: this.props.component,
-            path:this.props.path,
-            init:false
+            shouldRender:this.props.isMounted
 
         };
 
@@ -23,43 +20,59 @@ class DelayRoute extends Component {
 
     componentWillMount() {
         console.log('componentWillMount');
-
-
     }
     componentDidMount() {
         console.log('componentDidMount');
-        setTimeout(()=>{
-            this.setState({ init: true })
-        },3800)
-
-
-
-
-
     }
+
+
     componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps',this.context.router.history.location.pathname,nextProps.path,this.props.path);
-
-        this.setState({ shouldRender: false })
-
-        if (this.context.router.history.location.pathname !=nextProps.path) {
-
-
-
+        console.log("componentWillReceiveProps",this.props.isMounted,nextProps.isMounted);
+        if(this.props.isMounted!==nextProps.isMounted){
+            this.setState({ shouldRender: true })
+        }else{
+            this.setState({ shouldRender: false })
         }
 
-        this._asyncRequest = this.onPreload(1000,"promise_V_"+this.state.path).then((v)=>{
-            console.log(v);
-            this.setState({ shouldRender: true })
 
-        });
+        if (this.context.router.history.location.pathname !==this.context.router.route.location.pathname) {
+
+            this._asyncRequest = this.onPreload(1000,"promise_V_").then((v)=>{
+                console.log(v,Lidentite);
+                this.setState({ shouldRender: true })
+
+                document.body.className = "";
+                let cls='';
+                switch(this.context.router.history.location.pathname){
+                    case "/":
+                        cls = "home";
+                        break;
+                    case "/les-collections":
+                        cls = "page-template-tpl-collections";
+
+                        break;
+                    case "/lidentite":
+                        cls = "page-template-tpl-identity";
+                        break;
+                    case "/les-ateliers":
+                        cls = "page-template-tpl-workshop";
+                        break;
+                    default:
+                        cls = "";
+                        break;
+                }
+                document.body.classList.add(cls);
+
+
+            });
+
+        }
 
 
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        console.log("shouldComponentUpdate: " + JSON.stringify(nextProps) + " " + JSON.stringify(nextState));
-        if(nextState.shouldRender==false){
+        if(nextState.shouldRender===false){
             return false;
         }else{
             return true;
@@ -77,21 +90,31 @@ class DelayRoute extends Component {
     onPreload = (t, v) => {
         console.log("onPreload")
         return new Promise(function(resolve) {
-            Animation.pagePreLoad(t);
-            setTimeout(resolve.bind(null, v), t)
+            Animation.pagePreLoad(t,resolve.bind(null, v));
         });
     }
 
 
 
     render() {
+        if(this.state.shouldRender){
+            return(
+                <Switch>
+                    <Route path="/" exact component={Main} />
+                    <Route path="/les-collections" component={Les}/>
+                    <Route path="/lidentite" component={Lidentite} />
+                    <Route path="/les-ateliers" component={Ateliers} />
+                </Switch>
+            )
+        }else{
+            return null
+        }
 
-        let Comp=this.state.component; console.log('render',this.context.router);
 
-        return this.state.init && (this.context.router.history.location.pathname==this.props.path?   (this.state.shouldRender ?<Comp {...this.props} />:null) : (this.state.shouldRender ?null:<Comp {...this.props} />))
+
+
 
     }
 
-
 };
-export default DelayRoute;
+export default DelayRoute2;

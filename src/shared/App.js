@@ -1,7 +1,7 @@
 import React, { Component,Fragment } from 'react';
 import PropTypes from 'prop-types'
 import Header from 'components/Header';
-import DelayRoute2 from 'components/DelayRoute2';
+import DelayRoute from 'components/DelayRoute';
 import Animation from 'components/Animation';
 import {TweenMax} from 'gsap';
 import './App.css';
@@ -115,7 +115,7 @@ class App extends Component {
                     </div>
                     <Header/>
 
-                    <DelayRoute2 isMounted ={this.state.isMounted}/>
+                    <DelayRoute isMounted ={this.state.isMounted}/>
 
 
                 </div>

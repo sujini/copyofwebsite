@@ -80,7 +80,7 @@ class Lidentite extends Component {
 
 
         });
-        if(_dir=='prev'){
+        if(_dir==='prev'){
             TweenMax.to($('#s-slider-background .slider-background-item').eq(count+1),1,{left:itemW,ease:'Power3.easeInOut'})
         }else{
             TweenMax.to($('#s-slider-background .slider-background-item').eq(count),1,{left:0,ease:'Power3.easeInOut'})

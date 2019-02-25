@@ -1,7 +1,6 @@
 import React, { Component  } from 'react';
 import {TweenMax} from 'gsap';
 import Animation from 'components/Animation';
-import $ from 'jquery';
 
 class Ateliers extends Component {
     constructor(props) {

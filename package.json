@@ -1,8 +1,8 @@
 {
-  "name": "works",
+  "name": "copyofwebsite",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sujini.github.io/works/",
+  "homepage": "https://sujini.github.io/copyofwebsite/",
   "dependencies": {
     "cross-env": "^5.2.0",
     "gh-pages": "^1.2.0",
